@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 FREE UNLIMITED Claude 3.5 Sonnet - Personal AI Assistant</title>
+    <script src="https://js.puter.com/v2/"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .status-bar {
+            background: #4CAF50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .chat-container {
+            display: flex;
+            height: 600px;
+        }
+        
+        .sidebar {
+            width: 300px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-right: 1px solid #e9ecef;
+            overflow-y: auto;
+        }
+        
+        .sidebar h3 {
+            color: #495057;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        
+        .sidebar ul {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        
+        .sidebar li {
+            padding: 8px 0;
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+        
+        .sidebar li:before {
+            content: "✅ ";
+            color: #28a745;
+        }
+        
+        .chat-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #ffffff;
+        }
+        
+        .message {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 15px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        
+        .message.user {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin-left: auto;
+            text-align: right;
+        }
+        
+        .message.assistant {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            margin-right: auto;
+        }
+        
+        .message-header {
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+        }
+        
+        .message.user .message-header {
+            color: rgba(255,255,255,0.9);
+        }
+        
+        .message.assistant .message-header {
+            color: #495057;
+        }
+        
+        .input-container {
+            padding: 20px;
+            background: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .input-container input {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .input-container input:focus {
+            border-color: #667eea;
+        }
+        
+        .input-container button {
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        
+        .input-container button:hover {
+            transform: translateY(-2px);
+        }
+        
+        .input-container button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            color: #6c757d;
+        }
+        
+        .loading.show {
+            display: block;
+        }
+        
+        .examples {
+            margin-top: 20px;
+        }
+        
+        .example-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            background: #e9ecef;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 0.85em;
+            transition: background-color 0.2s;
+        }
+        
+        .example-btn:hover {
+            background: #dee2e6;
+        }
+        
+        @media (max-width: 768px) {
+            .chat-container {
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid #e9ecef;
+            }
+            
+            .messages {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Personal AI Assistant</h1>
+            <p>FREE UNLIMITED Claude 3.5 Sonnet via Puter.js</p>
+        </div>
+        
+        <div class="status-bar">
+            ✅ UNLIMITED ACCESS • NO API KEYS • NO COSTS • Claude 3.5 Sonnet Ready!
+        </div>
+        
+        <div class="chat-container">
+            <div class="sidebar">
+                <h3>🌟 Features</h3>
+                <ul>
+                    <li>Unlimited conversations</li>
+                    <li>No API keys needed</li>
+                    <li>Claude 3.5 Sonnet AI</li>
+                    <li>Advanced reasoning</li>
+                    <li>Code generation</li>
+                    <li>Creative writing</li>
+                    <li>Math & calculations</li>
+                    <li>Personal questions</li>
+                </ul>
+                
+                <h3>💡 Example Questions</h3>
+                <div class="examples">
+                    <button class="example-btn" onclick="setInput('What is 2+2?')">What is 2+2?</button>
+                    <button class="example-btn" onclick="setInput('Tell me about Eddrin Desiderio')">Tell me about Eddrin</button>
+                    <button class="example-btn" onclick="setInput('Create a responsive HTML portfolio page')">Create HTML portfolio</button>
+                    <button class="example-btn" onclick="setInput('Write a Python function to sort a list')">Python sorting function</button>
+                    <button class="example-btn" onclick="setInput('Explain machine learning basics')">Explain ML basics</button>
+                    <button class="example-btn" onclick="setInput('Write a short story about AI')">Write AI story</button>
+                </div>
+                
+                <h3>🎯 About Eddrin</h3>
+                <ul>
+                    <li>Web Developer</li>
+                    <li>BSc Information Technology</li>
+                    <li>STI College Tanauan</li>
+                    <li>HTML, CSS, JavaScript</li>
+                    <li>Best Programmer Award</li>
+                    <li>User-friendly solutions</li>
+                </ul>
+            </div>
+            
+            <div class="chat-main">
+                <div class="messages" id="messages">
+                    <div class="message assistant">
+                        <div class="message-header">🚀 Claude 3.5 Sonnet</div>
+                        <div>Hello! I'm your personal AI assistant powered by FREE UNLIMITED Claude 3.5 Sonnet via Puter.js. I can help you with programming, math, creative writing, questions about Eddrin's background, and much more. What would you like to know?</div>
+                    </div>
+                </div>
+                
+                <div class="loading" id="loading">
+                    <div>🤖 Claude 3.5 Sonnet is thinking...</div>
+                </div>
+                
+                <div class="input-container">
+                    <input type="text" id="user-input" placeholder="Ask me anything... (FREE UNLIMITED Claude 3.5 Sonnet!)" maxlength="1000">
+                    <button onclick="sendMessage()" id="send-btn">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Personal information about Eddrin
+        const personalInfo = `
+        HELLO!
+        I am Eddrin Desiderio
+        I hold a Bachelor of Science in Information Technology from STI College Tanauan.
+
+        Introduction
+        About Me
+        I hold a Bachelor of Science in Information Technology from STI College Tanauan, where I was recognized as the best programmer during my senior high school years. My journey in web development has been driven by a strong focus on delivering user-friendly and custom web solutions that meet client needs on time and within budget. I specialize in turning design concepts into interactive digital experiences using HTML, CSS, and JavaScript. I am committed to excellence in every aspect of my work.
+        `;
+
+        // Check if user is asking about personal information
+        function isPersonalQuestion(message) {
+            const personalKeywords = [
+                "who am i", "my name", "about me", "my skills", "my education", 
+                "my background", "my experience", "my contact", "my portfolio",
+                "tell me about myself", "what do you know about me", "eddrin"
+            ];
+            
+            return personalKeywords.some(keyword => message.toLowerCase().includes(keyword));
+        }
+
+        // Get system prompt based on user message
+        function getSystemPrompt(userMessage) {
+            const basePrompt = `You are a helpful, friendly AI assistant. Be natural and conversational in your responses.
+
+- Answer questions accurately and helpfully
+- For simple questions like math problems, give direct correct answers
+- Be conversational but not overly chatty
+- Only mention personal information if the user specifically asks about the person
+- Respond naturally to greetings like "Hello" without revealing personal details
+- Keep responses concise but complete`;
+
+            if (isPersonalQuestion(userMessage)) {
+                return basePrompt + `\n\nThe user is asking about themselves. Here is their personal information:\n${personalInfo}\n\nUse this information to answer their question about themselves.`;
+            } else {
+                return basePrompt + "\n\nAnswer the user's question naturally and accurately. Do not mention any personal information unless specifically asked.";
+            }
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('user-input');
+            const sendBtn = document.getElementById('send-btn');
+            const loading = document.getElementById('loading');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Disable input and show loading
+            input.disabled = true;
+            sendBtn.disabled = true;
+            loading.classList.add('show');
+            
+            // Add user message to chat
+            addMessage('user', message);
+            input.value = '';
+            
+            try {
+                // Get system prompt
+                const systemPrompt = getSystemPrompt(message);
+                
+                // Call Puter.js Claude API - UNLIMITED!
+                const response = await puter.ai.chat(message, {
+                    model: 'claude-3.5-sonnet',
+                    system: systemPrompt,
+                    stream: false
+                });
+                
+                // Add AI response to chat
+                let aiResponse = '';
+                if (response.message && response.message.content) {
+                    if (Array.isArray(response.message.content)) {
+                        aiResponse = response.message.content[0].text || response.message.content[0];
+                    } else {
+                        aiResponse = response.message.content;
+                    }
+                } else if (response.content) {
+                    aiResponse = response.content;
+                } else if (typeof response === 'string') {
+                    aiResponse = response;
+                } else {
+                    aiResponse = JSON.stringify(response);
+                }
+                
+                addMessage('assistant', aiResponse);
+                
+            } catch (error) {
+                console.error('Puter.js Error:', error);
+                
+                // Fallback response
+                let fallbackResponse = getFallbackResponse(message);
+                addMessage('assistant', `🔧 Using fallback response (Puter.js integration in progress):\n\n${fallbackResponse}`);
+            }
+            
+            // Re-enable input and hide loading
+            input.disabled = false;
+            sendBtn.disabled = false;
+            loading.classList.remove('show');
+            input.focus();
+        }
+
+        function getFallbackResponse(message) {
+            const messageLower = message.toLowerCase();
+            
+            // Personal questions
+            if (isPersonalQuestion(message)) {
+                return `Here's what I know about Eddrin Desiderio:\n\n${personalInfo}\n\nHe specializes in web development using HTML, CSS, and JavaScript, and is committed to delivering user-friendly solutions.`;
+            }
+            
+            // Math questions
+            if (messageLower.includes('2+2') || messageLower.includes('2 + 2')) {
+                return "2 + 2 = 4";
+            } else if (messageLower.includes('1+1') || messageLower.includes('1 + 1')) {
+                return "1 + 1 = 2";
+            } else if (messageLower.includes('math') || messageLower.includes('+') || messageLower.includes('-') || messageLower.includes('*') || messageLower.includes('/')) {
+                return "I can help with math problems! For complex calculations, the unlimited Claude 3.5 Sonnet integration will provide detailed solutions.";
+            }
+            
+            // Greetings
+            if (['hello', 'hi', 'hey', 'good morning', 'good afternoon'].some(greeting => messageLower.includes(greeting))) {
+                return "Hello! I'm your personal AI assistant powered by FREE UNLIMITED Claude 3.5 Sonnet via Puter.js. How can I help you today?";
+            }
+            
+            // Programming
+            if (['code', 'programming', 'python', 'javascript', 'html', 'css', 'ai', 'artificial intelligence'].some(keyword => messageLower.includes(keyword))) {
+                return "I can help with programming and AI concepts! The unlimited Claude 3.5 Sonnet integration will provide advanced code generation and explanations.";
+            }
+            
+            // Default
+            return `I can help you with "${message}"! I can assist with:\n• Math problems and calculations\n• Programming and coding questions\n• Information about Eddrin's background and skills\n• Writing and creative tasks\n• General questions and explanations\n\nThe unlimited Claude 3.5 Sonnet integration is ready for advanced responses!`;
+        }
+
+        function addMessage(role, content) {
+            const messages = document.getElementById('messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${role}`;
+            
+            const headerDiv = document.createElement('div');
+            headerDiv.className = 'message-header';
+            headerDiv.textContent = role === 'user' ? '👤 You' : '🚀 Claude 3.5 Sonnet';
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.textContent = content;
+            
+            messageDiv.appendChild(headerDiv);
+            messageDiv.appendChild(contentDiv);
+            messages.appendChild(messageDiv);
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        function setInput(text) {
+            document.getElementById('user-input').value = text;
+            document.getElementById('user-input').focus();
+        }
+
+        // Allow Enter key to send message
+        document.getElementById('user-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        // Focus input on load
+        window.addEventListener('load', function() {
+            document.getElementById('user-input').focus();
+        });
+    </script>
+</body>
+</html>
