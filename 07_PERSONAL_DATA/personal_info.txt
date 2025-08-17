@@ -1,7 +1,0 @@
-HELLO!
-I am Eddrin Desiderio
-I hold a Bachelor of Science in Information Technology from STI College Tanauan.
-
-Introduction
-About Me
-I hold a Bachelor of Science in Information Technology from STI College Tanauan, where I was recognized as the best programmer during my senior high school years. My journey in web development has been driven by a strong focus on delivering user-friendly and custom web solutions that meet client needs on time and within budget. specialize in turning design concepts into interactive digital experiences using HTML, CSS, and JavaScript. I am committed to excellence in every aspect of my work.
